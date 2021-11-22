@@ -1,12 +1,12 @@
 class UsersController < ApplicationController
   def index
     @users = User.all.order(updated_at: :desc)
-    render json: @users
+    render json: @users, each_serializer: UserSimpleSerializer
   end
 
   def show
     @user = User.find(params[:id])
-    render json: @user
+    render json: @user, include: ['accounts', 'accounts.transactions']
   end
 
   def new

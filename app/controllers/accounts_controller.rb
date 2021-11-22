@@ -1,7 +1,7 @@
 class AccountsController < ApplicationController
   def index
     @accounts = Account.all.order(user_id: :asc)
-    render json: @accounts
+    render json: @accounts, each_serializer: AccountSimpleSerializer
   end
 
   def show
